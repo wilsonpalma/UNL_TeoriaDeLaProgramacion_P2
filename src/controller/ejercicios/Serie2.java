@@ -21,6 +21,7 @@ public class Serie2 {
     }
     //fibonacci
     public int generar_fibonacci(int numero){
+        // 0 1 1 2 3 5 8
         int numeroAnterior = 0;
         int numeroSiguiente = 1;
         int resultado = 1;
@@ -35,21 +36,32 @@ public class Serie2 {
     }
     public void ejecutar(){
         Scanner sc = new Scanner(System.in);
+        // Se pide la cantidad de términos que se desea al usuario
         System.out.println("Ingrese el numero de terminos de la serie");
-        String numero = sc.nextLine();
-        int num_serie = Utilidades.tranformStringInt(numero);
+        int num_serie = Utilidades.tranformStringInt(sc.nextLine());
+
+        // Se verifica que el numero de términos deseados sea un valor positivo
         if(num_serie > 0){
-            int interruptor = 1;
+            int interruptor = 1; // Para alternar de signos + -
             String signo = "";
             float suma = 0.0f;
             String serie = "";
+            //Empezamos el bucle para construir la serie
             for (int i = 1; i <= num_serie; i++) {
                 int fibo = generar_fibonacci(i);
                 int impar = generar_impar(i);
                 int mult2 = generar_par(i);
+                // Se va contruyendo la serie
                 serie += signo+"("+fibo+" / "+impar+")^"+mult2;
+                // Se calcula la suma de n términos
                 suma += Math.pow((double)fibo/(double)impar,(double)mult2)*Integer.parseInt(signo.trim()+"1");
+                
+                // En caso de que no haya una siguiente interacción se termina el bucle
+                if(i+1 > num_serie){break;}
+
+                // Caso contrario, se prepara el signo para el siguiente término
                 if(i%2==0){interruptor = 1-interruptor;}
+                // Se asigna el signo dependiendo del valor de interruptor
                 if(interruptor==1){signo=" + ";}
                 else{signo=" - ";}
             }

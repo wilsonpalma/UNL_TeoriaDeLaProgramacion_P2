@@ -9,7 +9,7 @@ public class SueldoDeEmpleados {
         Scanner sc = new Scanner(System.in);
 
         int totalAutos = 0;
-        double totalVentas = 0.0, comision = 0.0, sueldoFijo = 2500.0, utilidad, sueldoTotal;
+        double totalVentas = 0.0, comision = 0.0, sueldoFijo = 2500.0, utilidad = 0.0, sueldoTotal = 0.0;
         char continuar = "s".charAt(0);
 
         System.out.println("Calculadora de sueldo de empleados\n");

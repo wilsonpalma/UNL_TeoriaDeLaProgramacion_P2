@@ -16,7 +16,7 @@ public class Main {
         System.out.println("1-Sueldo de empleados");
         System.out.println("2-Costos de llamadas");
         System.out.println("3-Facturación del agua");
-        System.out.println("4-Serie 2");
+        System.out.println("4-Serie2");
         System.out.println();
         System.out.print("Opción: ");
         int opt=Utilidades.tranformStringInt(sc.nextLine());

@@ -14,31 +14,43 @@ public class FacturacionAgua {
         System.out.print("Tipo de contribuyente (1-General, 2-Tercera Edad, 3-Discapacitado): ");
         int tipoContribuyente = Utilidades.tranformStringInt(sc.nextLine());
         
+        // Se revisa que el tipo de contrinuyente sea válido
+        if (!(tipoContribuyente >= 1 && tipoContribuyente <= 3)) {
+            System.out.println("Tipo de contribuyente inválido");
+            return;
+        }
+        
+        // Se calcula el porcentaje de discapacidad solo si es necesario
         double porcentajeDiscapacidad = 0;
         if (tipoContribuyente == 3) {
             System.out.print("Ingrese porcentaje de discapacidad: ");
             porcentajeDiscapacidad = Utilidades.tranformStringDouble(sc.nextLine());
         }
-        if(tipoContribuyente==1 || tipoContribuyente==2 || tipoContribuyente==3 && consumo>=0){
+
+        if(consumo>=0){
             // Cálculo del servicio de agua potable
-            double valorAguaPotable;
+            double valorAguaPotable=0;
             
             if (consumo <= 15) {
                 valorAguaPotable = 3.00;
-            } else if (consumo <= 25) {
+            }
+            if (consumo > 15 && consumo <= 25) {
                 valorAguaPotable = 3.00 + (consumo - 15) * 0.10;
-            } else if (consumo <= 40) {
+            }
+            if (consumo > 25 && consumo <= 40) {
                 valorAguaPotable = 3.00 + (10 * 0.10) + (consumo - 25) * 0.20;
-            } else if (consumo <= 60) {
+            }
+            if (consumo > 40 && consumo <= 60) {
                 valorAguaPotable = 3.00 + (10 * 0.10) + (15 * 0.20) + (consumo - 40) * 0.30;
-            } else {
+            }
+            if (consumo > 60) {
                 valorAguaPotable = 3.00 + (10 * 0.10) + (15 * 0.20) + (20 * 0.30) + (consumo - 60) * 0.35;
             }
             
             // Aplicar descuentos
             if (tipoContribuyente == 2) { // Tercera edad
                 if (consumo <= 15) {
-                    valorAguaPotable -= valorAguaPotable * 0.50;
+                    valorAguaPotable -= 3.00 * 0.50;
                 } else {
                     valorAguaPotable -= 3.00 * 0.30;
                 }
@@ -59,6 +71,6 @@ public class FacturacionAgua {
             System.out.println("Tasa Procesamiento Datos: $" + tasaProcesamiento);
             System.out.println("Total a Pagar: $" + total);
         }
-        else{System.out.println("Contribuyente no válido o consumo no válido (ingrese consumo positivo)");}
+        else{System.out.println("consumo no válido (ingrese consumo positivo)");}
     }
 }
